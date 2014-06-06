@@ -14,4 +14,12 @@ class Hand
   def count
     @cards.count
   end
+
+  def sum
+    sum = 0
+    @cards.each do
+      sum = + card.value
+    end
+  end
+
 end

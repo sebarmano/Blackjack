@@ -18,25 +18,25 @@ class DeckTest < MiniTest::Unit::TestCase
   # - A, 2..10, J, Q, K of spades
   def test_new_deck_is_in_order
     card = @deck.draw
-    assert_equal card, Card.new(:A, :clubs)
+    assert_equal card, Card.new(:A, :C)
 
     card = @deck.draw
-    assert_equal card, Card.new(2, :clubs)
+    assert_equal card, Card.new(2, :C)
 
     11.times { @deck.draw }
 
     card = @deck.draw
-    assert_equal card, Card.new(:A, :diamonds)
+    assert_equal card, Card.new(:A, :D)
 
     12.times { @deck.draw }
 
     card = @deck.draw
-    assert_equal card, Card.new(:A, :hearts)
+    assert_equal card, Card.new(:A, :H)
 
     12.times { @deck.draw }
 
     card = @deck.draw
-    assert_equal card, Card.new(:A, :spades)
+    assert_equal card, Card.new(:A, :S)
   end
 
   def test_deck_knows_how_many_are_left
