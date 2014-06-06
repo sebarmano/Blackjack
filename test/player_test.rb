@@ -20,7 +20,7 @@ class PlayerTest < Minitest::Unit::TestCase
     deck = Deck.new
     cards = deck.cards[0, 2]
     2.times { @player.hit(deck.draw) } # ask about this
-    assert_equal @player.hand, cards
+    assert_equal @player.hand.cards, cards
   end
 
   def test_player_can_hit

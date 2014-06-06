@@ -1,10 +1,11 @@
 require 'dealer'
+require 'hand'
 
 class Player
   def initialize(name, money)
     @name = name
     @money = money
-    @hand = []
+    @hand = Hand.new
   end
 
   def name
@@ -20,7 +21,7 @@ class Player
   end
 
   def hit(card)
-    @hand << card
+    @hand.add_card(card)
   end
 
   def bet(bet_money)
