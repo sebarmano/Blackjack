@@ -16,8 +16,8 @@ class CardTest < MiniTest::Unit::TestCase
     ace = Card.new(:A, :spades)
     two = Card.new(2, :hearts)
 
-    assert two.greater_than?(ace)
-    refute ace.greater_than?(two)
+    refute two.greater_than?(ace)
+    assert ace.greater_than?(two)
   end
 
   def test_face_card_ranks
