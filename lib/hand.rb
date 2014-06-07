@@ -1,5 +1,3 @@
-require 'pry'
-
 class Hand
   def initialize
     @cards = []
@@ -23,7 +21,6 @@ class Hand
     @cards.each do |card|
       aces += 1 if card.rank.to_s == 'A'
     end
-    # binding.pry
     aces
   end
 

@@ -14,6 +14,12 @@ class DealerTest < Minitest::Unit::TestCase
     assert_equal @dealer.deck, @shuffled_deck
   end
 
+  def test_dealer_has_hand # this test hand and draw. Is this right?
+    cards = @shuffled_deck.cards[0, 2]
+    2.times { @dealer.draw }
+    assert_equal @dealer.hand.cards, cards
+  end
+
   def test_dealer_can_deal_cards
     first_card = @shuffled_deck.first
     card = @dealer.deal

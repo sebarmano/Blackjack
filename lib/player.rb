@@ -27,4 +27,12 @@ class Player
   def bet(bet_money)
     @money -= bet_money
   end
+
+  def win(money_won) # need test for this
+    @money += money_won
+  end
+
+  def lose(money_lost) # need test for this
+    @money -= money_lost
+  end
 end

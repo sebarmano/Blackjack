@@ -1,13 +1,13 @@
+require 'player'
+require 'dealer'
+require 'pool'
+
 class Game
   def initialize
-    @pool = 0
+    @pool = Pool.new
   end
 
   def pool
     @pool
-  end
-
-  def add_bet(bet_money)
-    @pool += bet_money
   end
 end

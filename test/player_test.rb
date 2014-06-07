@@ -35,12 +35,12 @@ class PlayerTest < Minitest::Unit::TestCase
   def test_player_can_bet
     money_before_bet = @player.money
     game = Game.new
-    pool_before = game.pool
+    pool_before = game.pool.money
     bet_money = 50
     @player.bet(bet_money)
-    game.add_bet(bet_money)
+    game.pool.add_bet(bet_money)
     assert_equal @player.money, money_before_bet - bet_money
-    assert_equal game.pool, pool_before + bet_money
+    assert_equal game.pool.money, pool_before + bet_money
   end
 
 end
