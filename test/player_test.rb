@@ -5,11 +5,7 @@ require 'deck'
 
 class PlayerTest < Minitest::Unit::TestCase
   def setup
-    @player = Player.new('Sebastian', 1000)
-  end
-
-  def test_player_has_a_name
-    assert_equal @player.name, "Sebastian"
+    @player = Player.new(1000)
   end
 
   def test_player_has_money

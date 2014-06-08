@@ -1,12 +1,12 @@
 require "minitest/autorun"
 require "game"
 
-class PlayerTest < Minitest::Unit::TestCase
+class GameTest < Minitest::Unit::TestCase
   def setup
-    game = Game.new
+    @game = Game.new
   end
 
   def test_game_has_pool_of_money
-    assert_equal game.pool, 0
+    assert_equal @game.pool.money, 0
   end
 end

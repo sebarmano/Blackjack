@@ -11,7 +11,7 @@ class Pool
     @money += bet_money
   end
 
-  def reset # need test
+  def reset 
     @money = 0
   end
 end

@@ -2,14 +2,9 @@ require 'dealer'
 require 'hand'
 
 class Player
-  def initialize(name, money)
-    @name = name
+  def initialize(money)
     @money = money
     @hand = Hand.new
-  end
-
-  def name
-    @name
   end
 
   def money
