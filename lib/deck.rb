@@ -1,5 +1,4 @@
 require 'pry'
-
 require "card"
 
 class Deck

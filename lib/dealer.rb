@@ -14,7 +14,7 @@ class Dealer
     @deck.draw
   end
 
-  def draw
+  def draw # TODO needs test
     @hand.add_card(@deck.draw)
   end
 

@@ -48,4 +48,8 @@ class Hand
   def includes_ace?
     @cards.map  { |card| card.rank.to_s }.include?('A')
   end
+
+  def empty
+    @cards = []
+  end
 end

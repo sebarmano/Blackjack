@@ -38,5 +38,4 @@ class PlayerTest < Minitest::Unit::TestCase
     assert_equal @player.money, money_before_bet - bet_money
     assert_equal game.pool.money, pool_before + bet_money
   end
-
 end

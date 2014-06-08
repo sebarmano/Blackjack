@@ -20,9 +20,21 @@ class DealerTest < Minitest::Unit::TestCase
     assert_equal @dealer.hand.cards, cards
   end
 
+  def test_dealer_can_draw_cards
+    cards_before = @dealer.hand.cards.count
+    @dealer.draw
+    assert_equal cards_before + 1, @dealer.hand.cards. count
+  end
+
   def test_dealer_can_deal_cards
     first_card = @shuffled_deck.first
     card = @dealer.deal
     assert_equal card, first_card
+  end
+
+  def test_dealer_hand_reset
+    @dealer.draw
+    @dealer.hand.empty
+    assert_equal [], @dealer.hand.cards
   end
 end
