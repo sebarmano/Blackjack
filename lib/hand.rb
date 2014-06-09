@@ -16,29 +16,27 @@ class Hand
     @cards.count
   end
 
-  def aces_count
-    aces = 0
-    @cards.each do |card|
-      aces += 1 if card.rank.to_s == 'A'
-    end
-    aces
-  end
+  # def aces_count
+  #   aces = 0
+  #   @cards.each do |card|
+  #     aces += 1 if card.rank.to_s == 'A'
+  #   end
+  #   aces
+  # end
 
   def sum # refactor this
     sum = 0
     @cards.each do |card|
       sum += card.value(card)
     end
-    sum -= 10 * aces_count if @ace == 'L'
+    if includes_ace? && sum < 11
+      sum += 10
+    end
     sum
   end
 
   def busted?
     if sum > 21
-      if includes_ace? && @ace == 'H'
-        @ace = 'L'
-        busted?
-      end
       true
     else
       false

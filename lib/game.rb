@@ -8,91 +8,89 @@ class Game
   def initialize
     deck = Deck.new
     @dealer = Dealer.new(deck)
-    @player = Player.new(100)
+    @player = Player.new(1000)
     @pool = Pool.new
-    @messages = {
-      :welcome => "*** BLACKJACK TIME !! ***",
-      :bet => "Make your bet: ",
-      :bet_not_possible => "Bet not possible, try again.",
-      :player_hand => "Your cards >",
-      :dealer_first_hand => "Dealer first cards >",
-      :player_stands => "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn...",
-      :player_hits => "One more card for the Player!",
-      :hit_or_stand => "Do you want to (h)it or (s)tand? ",
-      :dont_understand => "I don't understand what you're saying.",
-      :no_money => "You don't have any money left. Better luck next time",
-      :player_money => "You have $#{@player.money}",
-      :player_wins => "Player wins! You've won $#{@pool.money}.",
-      :dealer_wins => "Dealer wins. Dealer hand sum is #{@dealer.hand.sum}.\nYou've lost $#{@pool.money}.",
-      :dealer_end_turn => "Dealer cards >" }
+  end
+
+  def welcome
+    puts ''
+    puts "** BLACKJACK TIME !! **"
+    play
   end
 
   def play
+    reset_game
     bet_made = bet
     bet unless bet_made
     round_start
+    player_turn
+    player_turn_end
+    dealer_turn unless @player.hand.busted?
+    round_end
   end
 
   def bet
-    puts @messages[:player_money]
-    print @messages[:bet]
+    puts ''
+    puts "You have $#{@player.money}"
+    print "Make your bet: "
     bet = gets.to_i
     if can_bet?(bet)
       @player.bet(bet)
       @pool.add_bet(bet)
       true
     else
-      puts @messages[:bet_not_possible]
+      puts "Bet not possible, try again."
       false
     end
   end
 
   def round_start
-    reset_game
     2.times do
       @player.hit(@dealer.deal)
       @dealer.draw
     end
     show_hand(@player)
-    print @messages[:dealer_first_hand]
+    print "Dealer first cards >"
     show_dealer_first_hand
-    player_turn
   end
 
   def player_turn
-    if player_hits?
-      puts @messages[:player_hits]
+    while player_hits?
+      puts "One more card for the Player!"
       @player.hit(@dealer.deal)
       show_hand(@player)
-      player_turn unless @player.hand.busted?
+      break if @player.hand.busted?
     end
-    puts @messages[:player_stands]
-    dealer_turn
+  end
+
+  def player_turn_end
+    if @player.hand.busted?
+      puts "You busted! (Your hand sums #{@player.hand.sum})\nDealer wins."
+      player_loses
+    else
+      puts "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn..."
+    end
   end
 
   def dealer_turn
-    unless @dealer.hand.sum >= 17
+    while @dealer.hand.sum < 17
       @dealer.draw
-      unless @dealer.hand.busted?
-        dealer_turn
-      end
+      break if @dealer.hand.busted?
     end
-    print @messages[:dealer_end_turn]
     show_hand(@dealer)
-    round_end
   end
 
   def round_end
-    if @player.hand.busted?
-      dealer_wins
-    elsif @dealer.hand.busted?
+    if @dealer.hand.busted?
+      puts "Dealer busted! (Hand sum is #{@dealer.hand.sum})"
       player_wins
     elsif @player.hand.sum <= @dealer.hand.sum
-      dealer_wins
+      puts "Dealer wins. (Hand sum is #{@dealer.hand.sum})"
+      player_loses
     else
+      "Player wins! Dealer hand sum is #{@dealer.hand.sum}"
       player_wins
     end
-    @player.money > 0 ? play : end_game
   end
 
   def can_bet?(bet)
@@ -100,52 +98,53 @@ class Game
   end
 
   def player_hits?
-    print @messages[:hit_or_stand]
-    answer = gets.chomp.downcase
-    if answer == "h"
-      true
-    elsif answer == "s"
-      false
-    else
-      puts @messages[:dont_understand]
-      player_hits?
+    answer = ''
+    while answer != 'h' && answer != 's'
+      print "Do you want to (H)it or (S)tand? "
+      answer = gets.chomp.downcase
+      if answer == "h"
+        return true
+      elsif answer == "s"
+        return false
+      end
     end
   end
 
   def show_hand(who)
     if who == @player # FIXME: refactor this
-      print @messages[:player_hand]
+      print "Your cards >"
     else
-      print @messages[:dealer_hand]
+      print "Dealer cards >"
     end
     who.hand.cards.each { |card| print " #{card.rank}#{card.suit}" }
     print "\n"
   end
 
   def show_dealer_first_hand
-    print @messages[:dealer_hand]
+    print "Dealer first cards >"
     card = @dealer.hand.cards[0]
     puts " #{card.rank}#{card.suit} ??"
   end
 
-  def dealer_wins
-    binding.pry
-    puts @messages[:dealer_wins]
+  def player_loses
+    puts "You've lost $#{@pool.money}."
+    @player.money > 0 ? play : end_game
   end
 
   def player_wins
-    puts @messages[:player_wins]
-    player.win(@pool * 2)
+    puts "Player wins! You've won $#{@pool.money}."
+    @player.win(@pool.money * 2)
   end
 
   def end_game
-    puts @messages[:no_money]
+    puts "You don't have any money left. Better luck next time"
   end
 
   def reset_game
     @player.hand.empty
     @dealer.hand.empty
     @dealer.deck = Deck.new.shuffle! if @dealer.deck.cards.count <= 10
+    @pool.reset
   end
 
   def pool # is this useful?
@@ -153,5 +152,4 @@ class Game
   end
 end
 
-game = Game.new
-game.play
+# game = Game.new.welcome

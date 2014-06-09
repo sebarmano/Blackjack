@@ -2,16 +2,17 @@ require 'pry'
 require "card"
 
 class Deck
+  RANKS = [:A, 2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K]
+  SUITS = [:C, :D, :H, :S]
+  
   def initialize
     @deck = []
-    @ranks = [:A, 2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K]
-    @suits = [:C, :D, :H, :S]
     create_deck
   end
 
   def create_deck
-    @suits.each do |suit|
-      @ranks.each do |rank|
+    SUITS.each do |suit|
+      RANKS.each do |rank|
         @deck << Card.new(rank, suit)
       end
     end
@@ -56,5 +57,4 @@ class Deck
   def first
     @deck.first
   end
-
 end

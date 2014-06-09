@@ -30,16 +30,13 @@ class HandTest < Minitest::Unit::TestCase
 
     @hand.add_card(card_d)
     sum = @hand.sum
-    assert_equal 22, sum
-    @hand.busted?
-    sum = @hand.sum
-    assert_equal 12, sum # Is this ok?
+    assert_equal 12, sum
   end
 
   def test_busted_if_higher_than_21
     card_a = Card.new(10, :C)
     card_b = Card.new(:A, :D)
-    card_c = Card.new(:A, :H)
+    card_c = Card.new(:J, :H)
     @hand.add_card(card_a)
     @hand.add_card(card_b)
 
@@ -49,5 +46,11 @@ class HandTest < Minitest::Unit::TestCase
 
     assert @hand.busted?
   end
+
+  def test_hand_checks_if_includes_ace # TODO: Complete this test.
+    @hand.empty
+    # complete here
+  end
+
 
 end

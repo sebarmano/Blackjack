@@ -2,7 +2,7 @@ class Card
   def initialize(rank, suit)
     @rank = rank
     @suit = suit
-    @values = {:A => 11, :K =>13, :Q => 12, :J => 11}
+    @values = {:A => 1, :K =>13, :Q => 12, :J => 11}
   end
 
   def rank

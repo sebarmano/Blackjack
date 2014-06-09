@@ -10,5 +10,6 @@ To start the game enter:
 
 ## To Do
 - Finalize game tests for each feature of the game.
-- Fix a bug that prints the wrong values for card sum and player money.
 - Add "double-down" feature.
+- Add "Blackjack" detection feature.
+- Use accessors.
