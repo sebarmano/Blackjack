@@ -1,28 +1,23 @@
 class Card
+  SYMBOL_VALUES = { :A => 1, :K =>13, :Q => 12, :J => 11 }
+  include Comparable
+  attr_reader :rank, :suit
+
   def initialize(rank, suit)
     @rank = rank
     @suit = suit
-    @values = {:A => 1, :K =>13, :Q => 12, :J => 11}
-  end
-
-  def rank
-    @rank
-  end
-
-  def suit
-    @suit
   end
 
   def value(card)
     if card.rank.is_a?(Symbol)
-       @values[card.rank]
+      SYMBOL_VALUES[card.rank]
     else
       card.rank
     end
   end
 
-  def greater_than?(card)
-    value(self) > card.value(card)
+  def <=>(other)
+    value(self) <=> other.value(other)
   end
 
   def ==(card)
