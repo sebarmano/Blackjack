@@ -28,7 +28,7 @@ class PlayerTest < Minitest::Unit::TestCase
     assert_equal before_cards + 1, after_cards
   end
 
-  def test_player_can_bet
+  def test_player_can_bet #
     money_before_bet = @player.money
     game = Game.new
     pool_before = game.pool.money
