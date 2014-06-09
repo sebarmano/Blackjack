@@ -27,7 +27,7 @@ class Player
     @money += money_won
   end
 
-  def lose(money_lost) # need test for this
-    @money -= money_lost
-  end
+  # def lose(money_lost) # need test for this
+  #   @money -= money_lost
+  # end
 end
