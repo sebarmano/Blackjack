@@ -16,7 +16,7 @@ class DealerTest < Minitest::Unit::TestCase
 
   def test_dealer_has_hand # this test hand and draw. Is this right?
     cards = @shuffled_deck.cards[0, 2]
-    2.times { @dealer.draw }
+    2.times { @dealer.hit(@shuffled_deck.draw) }
     assert_equal @dealer.hand.cards, cards
   end
 
@@ -33,7 +33,7 @@ class DealerTest < Minitest::Unit::TestCase
   end
 
   def test_dealer_hand_reset
-    @dealer.draw
+    @dealer.hit(@shuffled_deck.draw)
     @dealer.hand.empty
     assert_equal [], @dealer.hand.cards
   end

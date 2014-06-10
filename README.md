@@ -2,7 +2,7 @@
 This is a command line Blackjack game. Player starts with $1000 to bet and the game ends when he loses all money.
 
 To start the game enter:
-`ruby game.rb`
+`./bin/blackjack` 
 
 ## House Rules
 - Dealer: hits with 16, stands with 17.

@@ -20,15 +20,15 @@ class CardTest < MiniTest::Unit::TestCase
     refute ace > two
   end
 
-  def test_face_card_ranks
+  def test_face_card_values
     ten = Card.new(10, :hearts)
     jack = Card.new(:J, :spades)
     queen = Card.new(:Q, :diamonds)
     king = Card.new(:K, :clubs)
 
-    assert king == queen
-    assert queen == jack
-    assert jack == ten
+    assert king.value(king) == queen.value(queen)
+    assert queen.value(queen) == jack.value(jack)
+    assert jack.value(jack) == ten.value(ten)
   end
 
   def test_cards_are_equal
