@@ -10,7 +10,8 @@ To start the game enter:
 
 ## About the code
 ### Comparable and Enumerable
-There are no classes in the game in which makes sense to use the enumerable module. There are no clases in which I need to sort or search for any object. However for the Card class to pass the tests it needs to be comparable. So I used the comparable module in Card, redefining the <=> operator.
+- Hand class is Enumerable.
+- Card class is Comparable.
 
 ### Inheritance
 Both player and dealer have some things in common: both can hit when it's their turn and both have a hand to play with. This attribute and method have been moved to a superclass Person of the subclasses Dealer and Player.
