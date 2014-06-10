@@ -46,10 +46,9 @@ class Game
   def round_start
     2.times do
       @player.hit(@dealer.deal)
-      @dealer.draw
+      @dealer.hit(@dealer.deal)
     end
     show_hand(@player)
-    print "Dealer first cards >"
     show_dealer_first_hand
   end
 
@@ -63,18 +62,9 @@ class Game
     puts "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn..." unless @player.hand.busted?
   end
 
-  # def player_turn_end
-  #   if @player.hand.busted?
-  #     puts "You busted! (Your hand sums #{@player.hand.sum})\nDealer wins."
-  #     player_loses
-  #   else
-  #     puts "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn..."
-  #   end
-  # end
-
   def dealer_turn
     while @dealer.hand.sum < 17
-      @dealer.draw
+      @dealer.hit(@dealer.deal)
       break if @dealer.hand.busted?
     end
     show_hand(@dealer)

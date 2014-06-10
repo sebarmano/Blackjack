@@ -12,4 +12,3 @@ To start the game enter:
 - Finalize game tests for each feature of the game.
 - Add "double-down" feature.
 - Add "Blackjack" detection feature.
-- Use accessors.
