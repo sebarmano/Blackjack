@@ -1,9 +1,10 @@
 require 'deck'
+require 'person'
 
-class Dealer
+class Dealer < Person
   def initialize(deck)
     @deck = deck
-    @hand = Hand.new
+    super()
   end
 
   def deck
@@ -12,13 +13,5 @@ class Dealer
 
   def deal
     @deck.draw
-  end
-
-  def draw # TODO needs test
-    @hand.add_card(@deck.draw)
-  end
-
-  def hand
-    @hand
   end
 end

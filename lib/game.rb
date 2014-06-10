@@ -24,7 +24,6 @@ class Game
     bet unless bet_made
     round_start
     player_turn
-    player_turn_end
     dealer_turn unless @player.hand.busted?
     round_end
   end
@@ -47,10 +46,9 @@ class Game
   def round_start
     2.times do
       @player.hit(@dealer.deal)
-      @dealer.draw
+      @dealer.hit(@dealer.deal)
     end
     show_hand(@player)
-    print "Dealer first cards >"
     show_dealer_first_hand
   end
 
@@ -61,27 +59,22 @@ class Game
       show_hand(@player)
       break if @player.hand.busted?
     end
-  end
-
-  def player_turn_end
-    if @player.hand.busted?
-      puts "You busted! (Your hand sums #{@player.hand.sum})\nDealer wins."
-      player_loses
-    else
-      puts "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn..."
-    end
+    puts "Player stands! Your hand sum is #{@player.hand.sum}.\nIt's Dealer turn..." unless @player.hand.busted?
   end
 
   def dealer_turn
     while @dealer.hand.sum < 17
-      @dealer.draw
+      @dealer.hit(@dealer.deal)
       break if @dealer.hand.busted?
     end
     show_hand(@dealer)
   end
 
   def round_end
-    if @dealer.hand.busted?
+    if @player.hand.busted?
+        puts "You busted! (Your hand sums #{@player.hand.sum})\nDealer wins."
+        player_loses
+    elsif @dealer.hand.busted?
       puts "Dealer busted! (Hand sum is #{@dealer.hand.sum})"
       player_wins
     elsif @player.hand.sum <= @dealer.hand.sum
@@ -137,7 +130,7 @@ class Game
   end
 
   def end_game
-    puts "You don't have any money left. Better luck next time"
+    puts "You don't have any money left. Better luck next time!"
   end
 
   def reset_game
@@ -152,4 +145,4 @@ class Game
   end
 end
 
-# game = Game.new.welcome
+game = Game.new.welcome
