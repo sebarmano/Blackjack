@@ -16,14 +16,6 @@ class Hand
     @cards.count
   end
 
-  # def aces_count
-  #   aces = 0
-  #   @cards.each do |card|
-  #     aces += 1 if card.rank.to_s == 'A'
-  #   end
-  #   aces
-  # end
-
   def sum # refactor this
     sum = 0
     @cards.each do |card|
