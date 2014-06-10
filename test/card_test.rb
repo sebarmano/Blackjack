@@ -26,9 +26,9 @@ class CardTest < MiniTest::Unit::TestCase
     queen = Card.new(:Q, :diamonds)
     king = Card.new(:K, :clubs)
 
-    assert king > queen
-    assert queen > jack
-    assert jack > ten
+    assert king == queen
+    assert queen == jack
+    assert jack == ten
   end
 
   def test_cards_are_equal

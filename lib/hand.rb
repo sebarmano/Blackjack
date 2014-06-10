@@ -1,11 +1,13 @@
 class Hand
+  include Enumerable
+  attr_reader :cards
+
   def initialize
     @cards = []
-    @ace = 'H'
   end
 
-  def cards
-    @cards
+  def each
+    @cards.each {|card| yield card}
   end
 
   def add_card(card)
@@ -17,10 +19,8 @@ class Hand
   end
 
   def sum # refactor this
-    sum = 0
-    @cards.each do |card|
-      sum += card.value(card)
-    end
+    value = map { |card| card.value(card) }
+    sum = value.reduce( 0, :+ )
     if includes_ace? && sum < 11
       sum += 10
     end
@@ -36,7 +36,8 @@ class Hand
   end
 
   def includes_ace?
-    @cards.map  { |card| card.rank.to_s }.include?('A')
+    rank = map {|card| card.rank}
+    rank.include?(:A)
   end
 
   def empty

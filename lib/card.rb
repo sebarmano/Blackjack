@@ -1,5 +1,5 @@
 class Card
-  SYMBOL_VALUES = { :A => 1, :K =>13, :Q => 12, :J => 11 }
+  SYMBOL_VALUES = { :A => 1, :K =>10, :Q => 10, :J => 10 }
   include Comparable
   attr_reader :rank, :suit
 

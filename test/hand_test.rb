@@ -37,13 +37,12 @@ class HandTest < Minitest::Unit::TestCase
     card_a = Card.new(10, :C)
     card_b = Card.new(:A, :D)
     card_c = Card.new(:J, :H)
+    
     @hand.add_card(card_a)
     @hand.add_card(card_b)
-
-    # binding.pry
     refute @hand.busted?
-    @hand.add_card(card_c)
 
+    @hand.add_card(card_c)
     assert @hand.busted?
   end
 
