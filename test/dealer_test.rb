@@ -22,7 +22,7 @@ class DealerTest < Minitest::Unit::TestCase
 
   def test_dealer_can_draw_cards
     cards_before = @dealer.hand.cards.count
-    @dealer.draw
+    @dealer.hit(@shuffled_deck.draw)
     assert_equal cards_before + 1, @dealer.hand.cards. count
   end
 

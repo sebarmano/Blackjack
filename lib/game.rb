@@ -145,4 +145,4 @@ class Game
   end
 end
 
-game = Game.new.welcome
+# game = Game.new.welcome

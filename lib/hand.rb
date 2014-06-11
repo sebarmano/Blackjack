@@ -18,7 +18,7 @@ class Hand
     @cards.count
   end
 
-  def sum # refactor this
+  def sum
     value = map { |card| card.value(card) }
     sum = value.reduce( 0, :+ )
     if includes_ace? && sum < 11
