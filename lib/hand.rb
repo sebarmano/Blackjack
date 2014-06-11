@@ -20,8 +20,8 @@ class Hand
 
   def sum
     value = map { |card| card.value(card) }
-    sum = value.reduce( 0, :+ )
-    if includes_ace? && sum < 11
+    sum = value.reduce(0, :+)
+    if includes_ace? && sum < 12
       sum += 10
     end
     sum
@@ -35,12 +35,19 @@ class Hand
     end
   end
 
+  def blackjack?
+    count == 2 && sum == 21
+  end
+
   def includes_ace?
-    rank = map {|card| card.rank}
+    rank = map { |card| card.rank }
     rank.include?(:A)
   end
 
   def empty
     @cards = []
   end
+
+
+
 end

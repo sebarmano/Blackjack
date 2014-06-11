@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require 'card'
-require 'pry'
+require 'hand'
 
 class HandTest < Minitest::Unit::TestCase
   def setup
@@ -48,10 +48,39 @@ class HandTest < Minitest::Unit::TestCase
     assert @hand.busted?
   end
 
-  def test_hand_checks_if_includes_ace # TODO: Complete this test.
-    @hand.empty
-    # complete here
+  def test_hand_checks_if_includes_ace
+    king = Card.new(:K, :H)
+    six = Card.new(6, :S)
+    ace = Card.new(:A, :H)
+
+    @hand.add_card(king)
+    refute @hand.includes_ace?
+
+    @hand.add_card(ace)
+    assert @hand.includes_ace?
+
+    @hand.add_card(six)
+    assert @hand.includes_ace?
   end
 
+  def test_hand_knows_if_has_blackjack
+    hand1 = @hand
+    hand2 = Hand.new
 
+    ace = Card.new(:A, :S)
+    six = Card.new(6, :D)
+    jack = Card.new(:J, :D)
+    five = Card.new(5, :H)
+
+    hand1.add_card(six)
+    hand1.add_card(jack)
+    refute hand1.blackjack?
+
+    hand1.add_card(five)
+    refute hand1.blackjack?
+
+    hand2.add_card(jack)
+    hand2.add_card(ace)
+    assert hand2.blackjack?
+  end
 end
